@@ -1,0 +1,60 @@
+# Spring配置
+spring:
+  application:
+    name: 论坛系统
+  output:
+    ansi:
+      enabled: ALWAYS # 控制台输出彩色日志
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/forum_db?characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver # 数据库连接驱动
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: NON_NULL
+    time-zone: Asia/Shanghai
+# 服务器配置
+server:
+  port: 9090
+
+# 日志配置
+logging:
+  pattern:
+    dateformat: MM-dd HH:mm:ssc
+  level:
+    root: info # 日志的默认级别
+    com.example.forum: debug # 指定包下的日志级别
+  file:
+    path: G:/javaG/spring_forum/forum/log/forum
+
+springdoc:
+  info:
+    title: 论坛系统API
+    description: 论坛系统前后端分离API测试
+    version: 1.0
+    contact:
+      name: study
+      url: https://edu.example.com
+      email: 1598896550@qq.com
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+  group:
+    forum-api:
+      paths-to-match: /api/users/**
+      description: 用户管理相关API
+  enabled: true
+  show-actuator: true
+  pretty-print: true
+
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml  # 指定xxxMapper.xml的扫描路径
+
+# 项⽬⾃定义相关配置
+forum:
+  login:
+    url: sign-in.html  # 未登录状况下强制跳转⻚⾯
+  index:  # ⾸⻚配置节点
+    board-num: 9  # ⾸⻚中显⽰的版块个数
